@@ -1,0 +1,33 @@
+{
+  "name": "easy-dynamodb-client",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=6.0"
+  },
+  "description": "mongodb to dynamodb grammer converter",
+  "main": "index.js",
+  "repository": {
+    "private": true
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "keywords": [
+    "dynamodb"
+  ],
+  "dependencies": {
+    "amazon-dax-client": "^1.1.4",
+    "aws-sdk": "^2.337.0",
+    "bluebird": "^3.5.2",
+    "config": "^2.0.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "author": "firstguo<firstguo_yy@foxmail.com>",
+  "license": "ISC"
+}

@@ -1,0 +1,7 @@
+# Logs
+log
+node_modules
+.DS_Store
+.idea/
+old
+webapps/script/data/*

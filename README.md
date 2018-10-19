@@ -82,12 +82,14 @@ let tableClient = new dynamodbClient(config);
 ```
 tableClient.get(Index, rtnAttrs)
 tableClient.batchGet(Index, rtnAttrs)
-```
+
 Index: {
     hash_key: 'hash_key value',   
     range_key: 'range_key value'  
 } //  
 rtnArrs: Array. 需要返回的字段名称列表
+```
+
 
 #### query
 ```

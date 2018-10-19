@@ -52,16 +52,75 @@ const config = {
     daxConfig: {endpoints: ['aws.dax.address.cache.amazonaws.com:8111']}
     verbose: true
 }
-let tableClient = new dynamodbClient(tableConfig);
+let tableClient = new dynamodbClient(config);
 tableClient.query({name: 'yingying', bundle_id: 'com.tencent.mm'}).then((user) => {
     console.log(JSON.stringify(user, null, 4));
 })
 
 ```
 ### 语法详解
+##### 初始化
+```
+const dynamodbClient = require("easy-dynamodb-client");
+const config = {
+    tableConfig: {
+        tableName: 'user',  // required. 表的名称
+        indexList: [
+            {hash_key: 'user_id'}, // 表的hash_key和range_key无需索引名称
+            {hash_key: 'name', range_key: 'bundle_id', index_name: 'name-index'} 
+            // 二级索引的hash_key和range_key, 必须索引名称 index_name
+        ] // 长度至少为1，包含表的hash_key和range_key
+    },
+    daxConfig: {endpoints: ['aws.dax.address.cache.amazonaws.com:8111']}, // optional. dax配置
+    verbose: true // 是否打印详细log
+}
+let tableClient = new dynamodbClient(config);
+```
 
+##### 语法
+##### get && batchGet:
+```
+tableClient.get(Index, rtnAttrs)
+tableClient.batchGet(Index, rtnAttrs)
+```
+Index: {
+    hash_key: 'hash_key value',   
+    range_key: 'range_key value'  
+} //  
+rtnArrs: Array. 需要返回的字段名称列表
 
+#### query
+```
+tableClient.query({
+    hour: 2018051322,
+    app_name: {$begins_with: 'weixin_msg'}
+}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
 
+tableClient.query({
+    hour: 2018051322,
+    app_name: {$begins_with: 'weixin_msg'}
+}, ["hour", "app_name"], {limit: 2, sort: {hour: -1}});
+
+tableClient.query({
+    hour: 2018051322,
+    app_name: {$contains: 'weixin_msg'}
+}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+
+tableClient.query({
+    app_name: 'weixin_msg',
+    hour: {$gte: 2018051322, $lte: 2018051422}
+}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+
+tableClient.query({
+    app_name: 'weixin_msg',
+    hour: {$in: [2018051322, 2018051323, 2018051422]}
+}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+
+tableClient.query({
+    app_name: 'weixin_msg',
+    arr_data: {$size: {$gte: 2, $lte: 5}}
+}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+```
 ---
 #### 听说你想请我喝下午茶？😏
 <img src="https://upload-images.jianshu.io/upload_images/14511459-230b7344a796990c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">

@@ -95,33 +95,33 @@ rtnArrs: Array. 需要返回的字段名称列表
 ```
 tableClient.query({
     hour: 2018051322,
-    app_name: {$begins_with: 'weixin_msg'}
-}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+    app: {$begins_with: 'weixin_msg'}
+}, ["hour", "app"], {limit: 2, sort: {hour: 1}});
 
 tableClient.query({
     hour: 2018051322,
-    app_name: {$begins_with: 'weixin_msg'}
-}, ["hour", "app_name"], {limit: 2, sort: {hour: -1}});
+    app: {$begins_with: 'weixin_msg'}
+}, ["hour", "app"], {limit: 2, sort: {hour: -1}});
 
 tableClient.query({
     hour: 2018051322,
-    app_name: {$contains: 'weixin_msg'}
-}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+    app: {$contains: 'weixin_msg'}
+}, ["hour", "app"], {limit: 2, sort: {hour: 1}});
 
 tableClient.query({
-    app_name: 'weixin_msg',
+    app: 'weixin_msg',
     hour: {$gte: 2018051322, $lte: 2018051422}
-}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+}, ["hour", "app"], {limit: 2, sort: {hour: 1}});
 
 tableClient.query({
-    app_name: 'weixin_msg',
+    app: 'weixin_msg',
     hour: {$in: [2018051322, 2018051323, 2018051422]}
-}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+}, ["hour", "app"], {limit: 2, sort: {hour: 1}});
 
 tableClient.query({
-    app_name: 'weixin_msg',
+    app: 'weixin_msg',
     arr_data: {$size: {$gte: 2, $lte: 5}}
-}, ["hour", "app_name"], {limit: 2, sort: {hour: 1}});
+}, ["hour", "app"], {limit: 2, sort: {hour: 1}});
 ```
 ---
 #### 听说你想请我喝下午茶？😏
